@@ -25,7 +25,7 @@ def detail(request, type_no):
     type_obj = get_object_or_404(Type, pk=type_no)
     item_list = Item.objects.filter(type=type_obj)
     response = HttpResponse()
-    heading1 = '<p>' + f"Items for type " + '</p>'
+    heading1 = '<p>' + f"Items for type {type_obj.name}" + '</p>'
     response.write(heading1)
     para = ''
     for item in item_list:

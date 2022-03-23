@@ -1,35 +1,26 @@
 from urllib import response
-from django.http import HttpResponse
 from .models import Type, Item
+from django.shortcuts import render 
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
 def index(request):
-    item_list = Item.objects.all().order_by('-price')[:7]
-    response = HttpResponse()
-    heading1 = '<p>' + 'Top 7 Items: ' + '</p>'
-    response.write(heading1)
-    para = ''
-    for item in item_list:
-        para += '<p>'+ str(item.id) + ': ' + str(item) + '</p>'
-    response.write(para)
-    return response
+    type_list = Type.objects.all().order_by('id')[:7]
+    # b - iii) extra variables are passed to the template
+    # variable name - type_list
+    return render(request, 'myapp1/index0.html', {'type_list': type_list})
+    
 
 
 def about(request):
-    return HttpResponse('<h1>This is an Online Grocery Store</h1>')
+    # d- iii) extra variables are not passed to the template
+    return render(request, 'myapp1/about0.html')
 
 
 def detail(request, type_no):
     type_obj = get_object_or_404(Type, pk=type_no)
     item_list = Item.objects.filter(type=type_obj)
-    response = HttpResponse()
-    heading1 = '<p>' + f"Items for type {type_obj.name}" + '</p>'
-    response.write(heading1)
-    para = ''
-    for item in item_list:
-        para += '<p>'+ str(item.id) + ': ' + str(item) + '</p>'
-    response.write(para)
-
-    return response
+    # e -iv) extra variables are passed to the template
+    # e - v) variable name - item_list
+    return render(request, 'myapp1/detail0.html', {'item_list': item_list})

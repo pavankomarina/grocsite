@@ -23,10 +23,14 @@ class Item(models.Model):
     stock = models.PositiveIntegerField(default=100)
     available = models.BooleanField(default=True)
     description = models.TextField(blank=True)
+    interested = models.PositiveIntegerField(default=0)
 
     def __str__(self) -> str:
         return self.name
-
+    
+    def topup(self):
+        self.stock += 200
+        self.save()
 
 class Client(User):     
     CITY_CHOICES = [

@@ -1,0 +1,14 @@
+.hbar1 {
+    display: inline;
+    margin: 15px;
+   }
+
+h1 {
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+    color: black;
+    font-size: large;
+    text-decoration-color: aqua;
+    position: relative;
+    }

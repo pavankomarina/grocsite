@@ -1,4 +1,5 @@
 from urllib import response
+from django.http import HttpResponse
 from .models import Type, Item
 from django.shortcuts import render 
 from django.shortcuts import get_object_or_404
@@ -24,3 +25,11 @@ def detail(request, type_no):
     # e -iv) extra variables are passed to the template
     # e - v) variable name - item_list
     return render(request, 'myapp1/detail0.html', {'item_list': item_list})
+
+
+def items(request):
+    itemlist = Item.objects.all().order_by('id')[:20]
+    return render(request, 'myapp1/items.html', {'itemlist': itemlist})
+
+def placeorder(request):
+    return HttpResponse("<h1>You can place your order here.</h1>")
